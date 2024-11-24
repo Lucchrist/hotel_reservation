@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Réservation d'Hôtel</title>
+    {% load static %} <!-- Charger la bibliothèque static -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Réservation d'Hôtel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/clients/">Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chambres/">Chambres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/recherche/">Rechercher Réservation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  
+
+    <!-- Chambres Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Nos Chambres Disponibles</h2>
+        <div class="row">
+            {% for chambre in chambres %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <!-- Afficher la première photo de la chambre -->
+                    {% if chambre.photos.all|length > 0 %}
+                    <img src="{{ chambre.photos.first.image.url }}" class="card-img-top" alt="Photo de la chambre">
+                    {% else %}
+                    <img src="{% static 'images/default-chambre.jpg' %}" class="card-img-top" alt="Image par défaut">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">Chambre {{ chambre.numero }}</h5>
+                        <p class="card-text">Type : {{ chambre.type }}</p>
+                        <p class="card-text">Prix : {{ chambre.prix_par_nuit }} $/nuit</p>
+                        <a href="{% url 'details_chambre' chambre.id %}" class="btn btn-primary">Voir Détails</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Réservation d'Hôtel. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

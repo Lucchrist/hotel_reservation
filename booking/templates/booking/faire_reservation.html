@@ -1,0 +1,19 @@
+{% extends "booking/base.html" %}
+
+{% block title %}Réserver la Chambre{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Réserver la Chambre {{ chambre.numero }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Confirmer la Réservation</button>
+    </form>
+</div>
+{% endblock %}

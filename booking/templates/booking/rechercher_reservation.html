@@ -1,0 +1,30 @@
+{% extends "booking/base.html" %}
+{% load static %} <!-- Ajoutez cette ligne pour charger la bibliothèque 'static' -->
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Rechercher une Réservation</h2>
+    <form method="get">
+        <div class="mb-3">
+            <label for="numero_reservation" class="form-label">Numéro de Réservation</label>
+            <input type="text" class="form-control" id="numero_reservation" name="numero_reservation" placeholder="Entrez le numéro">
+        </div>
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
+
+    {% if reservation %}
+    <div class="mt-5">
+        <h3>Détails de la Réservation</h3>
+        <p><strong>Numéro :</strong> {{ reservation.numero_reservation }}</p>
+        <p><strong>Client :</strong> {{ reservation.client }}</p>
+        <p><strong>Chambre :</strong> {{ reservation.chambre }}</p>
+        <p><strong>Date de Début :</strong> {{ reservation.date_debut }}</p>
+        <p><strong>Date de Fin :</strong> {{ reservation.date_fin }}</p>
+    </div>
+    {% elif request.GET.numero_reservation %}
+    <div class="mt-5 text-danger">
+        <p>Aucune réservation trouvée avec ce numéro.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

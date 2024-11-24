@@ -1,0 +1,16 @@
+{% extends "booking/base.html" %}
+
+{% block title %}Confirmation de Réservation{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Réservation Confirmée</h2>
+    <p><strong>Numéro de Réservation :</strong> {{ reservation.numero_reservation }}</p>
+    <p><strong>Nom du Client :</strong> {{ reservation.nom_client }}</p>
+    <p><strong>Chambre :</strong> {{ reservation.chambre.numero }}</p>
+    <p><strong>Prix Total :</strong> {{ reservation.prix_total }} $</p>
+    <p><strong>Date de début :</strong> {{ reservation.date_debut }}</p>
+    <p><strong>Date de fin :</strong> {{ reservation.date_fin }}</p>
+    <a href="/" class="btn btn-success">Retour à l'Accueil</a>
+</div>
+{% endblock %}

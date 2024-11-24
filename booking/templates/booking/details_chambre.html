@@ -1,0 +1,31 @@
+{% extends "booking/base.html" %}
+
+{% block title %}Détails de la Chambre{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Détails de la Chambre {{ chambre.numero }}</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Type : {{ chambre.type }}</h5>
+            <p class="card-text">Prix : {{ chambre.prix_par_nuit }} $/nuit</p>
+            <p class="card-text">Statut : 
+                {% if chambre.statut %}
+                    Disponible
+                {% else %}
+                    Réservée
+                {% endif %}
+            </p>
+            <!-- Afficher toutes les photos -->
+            <div class="row">
+                {% for photo in chambre.photos.all %}
+                <div class="col-md-4 mb-3">
+                    <img src="{{ photo.image.url }}" alt="Photo de la chambre" class="img-fluid rounded">
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'faire_reservation' chambre.id %}" class="btn btn-primary">Réserver</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
